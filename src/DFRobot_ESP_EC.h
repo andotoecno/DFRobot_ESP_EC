@@ -29,16 +29,27 @@
  #define RAWEC_276_HIGH 3.2
  #define RAWEC_1288_LOW 8
  #define RAWEC_1288_HIGH 16.8
- 
+ #define EC_SENSOR_MAX_CELL_CONST 15 // Usable products are k=1 or k=10
+ #define EC_SENSOR_MAX_RANGE_mscm 15 // 15ms/cm is the maximum range of the EC sensor
+
  #define ReceivedBufferLength_EC 10 // length of the Serial CMD buffer
  
+ enum 
+ {
+     EC_CALIBRATION_MODE_ERROR,
+     EC_CALIBRATION_MODE_READY,
+     EC_CALIBRATION_MODE_RUNNING,
+     EC_CALIBRATION_MODE_SAVE_AND_EXIT,
+ };
+
  class DFRobot_ESP_EC
  {
  public:
      DFRobot_ESP_EC();
      ~DFRobot_ESP_EC();
-     void calibration(float voltage, float temperature, char *cmd); // calibration by Serial CMD
-     void calibration(float voltage, float temperature);
+     void calibration(float voltage, float temperature, int mode);
+     void calibration_by_serial_CMD(float voltage, float temperature, char *cmd);
+     void calibration_by_serial_CMD(float voltage, float temperature);
      float readEC(float voltage, float temperature);  // voltage to EC value, with temperature compensation
      void begin(uint16_t eeprom_start_addr); // initialization
      float kvalueLow;
