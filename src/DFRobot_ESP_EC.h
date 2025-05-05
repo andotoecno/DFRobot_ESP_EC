@@ -47,9 +47,9 @@
  public:
      DFRobot_ESP_EC();
      ~DFRobot_ESP_EC();
-     void calibration(float voltage, float temperature, int mode);
-     void calibration_by_serial_CMD(float voltage, float temperature, char *cmd);
-     void calibration_by_serial_CMD(float voltage, float temperature);
+     boolean calibration(float voltage, float temperature, int mode);
+     boolean calibration_by_serial_CMD(float voltage, float temperature, char *cmd);
+     boolean calibration_by_serial_CMD(float voltage, float temperature);
      float readEC(float voltage, float temperature);  // voltage to EC value, with temperature compensation
      void begin(uint16_t eeprom_start_addr); // initialization using EEPROM
      void begin(float k_low, float k_high); // initialization with direct k values
@@ -68,7 +68,7 @@
      uint16_t _eepromStartAddress;
  private:
      boolean cmdSerialDataAvailable();
-     void ecCalibration(byte mode); // calibration process, wirte key parameters to EEPROM
+     boolean ecCalibration(byte mode); // calibration process, wirte key parameters to EEPROM
      byte cmdParse(const char *cmd);
      byte cmdParse();
  };
