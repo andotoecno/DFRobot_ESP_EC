@@ -69,6 +69,21 @@ void DFRobot_ESP_EC::begin(uint16_t eeprom_start_addr)
     Serial.println(F("<<<"));
 }
 
+void DFRobot_ESP_EC::begin(float cell_const_low, float cell_const_high)
+{
+    this->kvalueLow = cell_const_low;
+    this->kvalueHigh = cell_const_high;
+    this->_kvalue = this->kvalueLow; // set default K value: K = kvalueLow
+    this->_eepromStartAddress = 0xFFFF; // Indicate that EEPROM is not used for initialization
+
+    Serial.println(F(">>>EC Initialized with Direct Values<<<"));
+    Serial.print(F(">>>kvalueLow: "));
+    Serial.print(this->kvalueLow);
+    Serial.print(F(", kvalueHigh: "));
+    Serial.print(this->kvalueHigh);
+    Serial.println(F("<<<"));
+}
+
 float DFRobot_ESP_EC::readEC(float voltage, float temperature)
 {
     float value = 0, valueTemp = 0;

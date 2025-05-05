@@ -51,7 +51,8 @@
      void calibration_by_serial_CMD(float voltage, float temperature, char *cmd);
      void calibration_by_serial_CMD(float voltage, float temperature);
      float readEC(float voltage, float temperature);  // voltage to EC value, with temperature compensation
-     void begin(uint16_t eeprom_start_addr); // initialization
+     void begin(uint16_t eeprom_start_addr); // initialization using EEPROM
+     void begin(float k_low, float k_high); // initialization with direct k values
      float kvalueLow;
      float kvalueHigh;
  
